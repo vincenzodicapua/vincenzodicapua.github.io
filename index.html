@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mario Rossi — Fotografo</title> <!-- ✏️ Cambia il nome -->
+  <meta name="description" content="Portfolio fotografico di Mario Rossi"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    /* =========================================================
+       COLORI — modifica qui per cambiare tutto il tema
+    ========================================================= */
+    :root {
+      --bg:        #0e0e0e;
+      --surface:   #1a1a1a;
+      --accent:    #c8a96e;   /* ✏️ Colore dorato — cambia a piacere */
+      --text:      #e8e8e8;
+      --muted:     #888;
+      --white:     #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── NAVBAR ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 3rem;
+      background: linear-gradient(to bottom, rgba(14,14,14,.95), transparent);
+      backdrop-filter: blur(2px);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 300; letter-spacing: .15em;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .8rem; letter-spacing: .12em; text-transform: uppercase;
+      transition: color .3s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ───────────────────────────────────────────── */
+    #hero {
+      height: 100vh;
+      /* ✏️ Sostituisci con il percorso della tua foto hero, es: url('foto/hero.jpg') */
+      background: url('https://picsum.photos/seed/portfolio/1600/900') center/cover no-repeat;
+      display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 5rem 3rem;
+      position: relative;
+    }
+    #hero::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(14,14,14,.85) 30%, transparent 70%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-content h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 300; line-height: 1.05;
+      color: var(--white);
+    }
+    .hero-content h1 em { font-style: italic; color: var(--accent); }
+    .hero-content p {
+      margin-top: .8rem; font-size: .9rem;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--muted);
+    }
+    .scroll-hint {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 1; display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      color: var(--muted); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
+    }
+    .scroll-hint span { display: block; width: 1px; height: 50px;
+      background: linear-gradient(to bottom, var(--accent), transparent); animation: drop 1.6s infinite; }
+    @keyframes drop { 0%{opacity:0;transform:scaleY(0);transform-origin:top}
+      50%{opacity:1} 100%{opacity:0;transform:scaleY(1);transform-origin:top} }
+
+    /* ── SEZIONI GENERALI ───────────────────────────────── */
+    section { padding: 6rem 3rem; max-width: 1300px; margin: 0 auto; }
+    .section-label {
+      font-size: .7rem; letter-spacing: .25em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300;
+      color: var(--white); margin-bottom: 3rem;
+    }
+
+    /* ── GALLERY ────────────────────────────────────────── */
+    #gallery { max-width: 100%; padding: 6rem 2rem; }
+    #gallery > * { max-width: 1300px; margin-left: auto; margin-right: auto; }
+
+    .gallery-grid {
+      columns: 3; column-gap: 1rem;
+      max-width: 1300px; margin: 0 auto;
+    }
+    @media(max-width: 900px) { .gallery-grid { columns: 2; } }
+    @media(max-width: 550px) { .gallery-grid { columns: 1; } }
+
+    .gallery-item {
+      break-inside: avoid; margin-bottom: 1rem;
+      overflow: hidden; cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%; display: block;
+      transition: transform .5s ease, filter .5s ease;
+      filter: brightness(.9);
+    }
+    .gallery-item:hover img { transform: scale(1.04); filter: brightness(1); }
+    .gallery-item .overlay {
+      position: absolute; inset: 0;
+      background: rgba(14,14,14,.5);
+      opacity: 0; transition: opacity .4s;
+      display: flex; align-items: flex-end; padding: 1.2rem;
+    }
+    .gallery-item:hover .overlay { opacity: 1; }
+    .overlay-text {
+      color: var(--white); font-size: .75rem;
+      letter-spacing: .1em; text-transform: uppercase;
+    }
+
+    /* ── ABOUT ──────────────────────────────────────────── */
+    #about { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    @media(max-width: 800px) { #about { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    .about-img { position: relative; }
+    .about-img img { width: 100%; display: block; filter: grayscale(20%); }
+    .about-img::before {
+      content: ''; position: absolute; top: -1rem; left: -1rem;
+      right: 1rem; bottom: 1rem;
+      border: 1px solid var(--accent); z-index: -1;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: .95rem; }
+    .about-stats {
+      display: flex; gap: 3rem; margin-top: 2rem;
+      border-top: 1px solid #2a2a2a; padding-top: 2rem;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; color: var(--accent); font-weight: 300;
+    }
+    .stat-label { font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── CATEGORIE ──────────────────────────────────────── */
+    .categories-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem;
+    }
+    .cat-card {
+      position: relative; overflow: hidden; cursor: pointer; height: 220px;
+    }
+    .cat-card img { width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s; filter: brightness(.6); }
+    .cat-card:hover img { transform: scale(1.06); filter: brightness(.8); }
+    .cat-card .cat-label {
+      position: absolute; inset: 0; display: flex;
+      flex-direction: column; justify-content: flex-end; padding: 1.5rem;
+    }
+    .cat-label h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: var(--white); font-weight: 300;
+    }
+    .cat-label span { font-size: .7rem; color: var(--accent); letter-spacing: .15em; text-transform: uppercase; }
+
+    /* ── CONTATTI ───────────────────────────────────────── */
+    #contact { text-align: center; }
+    #contact .section-title { margin-bottom: 1rem; }
+    #contact p { color: var(--muted); max-width: 500px; margin: 0 auto 2.5rem; }
+    .btn {
+      display: inline-block; padding: .9rem 2.8rem;
+      border: 1px solid var(--accent); color: var(--accent);
+      text-decoration: none; font-size: .8rem;
+      letter-spacing: .2em; text-transform: uppercase;
+      transition: background .3s, color .3s;
+    }
+    .btn:hover { background: var(--accent); color: var(--bg); }
+    .social-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+    .social-links a {
+      color: var(--muted); text-decoration: none; font-size: .75rem;
+      letter-spacing: .15em; text-transform: uppercase; transition: color .3s;
+    }
+    .social-links a:hover { color: var(--accent); }
+
+    /* ── FOOTER ─────────────────────────────────────────── */
+    footer {
+      text-align: center; padding: 2.5rem;
+      border-top: 1px solid #1e1e1e;
+      color: var(--muted); font-size: .75rem; letter-spacing: .1em;
+    }
+
+    /* ── LIGHTBOX ───────────────────────────────────────── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,.93); justify-content: center; align-items: center;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+    #lb-close {
+      position: fixed; top: 1.5rem; right: 2rem;
+      color: var(--white); font-size: 2.5rem; cursor: pointer; z-index: 1001; line-height: 1;
+    }
+    #lb-prev, #lb-next {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      color: var(--white); font-size: 2rem; cursor: pointer;
+      background: none; border: none; padding: 1rem; z-index: 1001;
+    }
+    #lb-prev { left: 1rem; } #lb-next { right: 1rem; }
+    #lb-caption {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      color: var(--muted); font-size: .8rem; letter-spacing: .15em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+<nav>
+  <a href="#hero" class="nav-logo">Mario Rossi</a> <!-- ✏️ Il tuo nome -->
+  <ul class="nav-links">
+    <li><a href="#gallery">Portfolio</a></li>
+    <li><a href="#categories">Categorie</a></li>
+    <li><a href="#about">Chi sono</a></li>
+    <li><a href="#contact">Contatti</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-content">
+    <h1>Mario <em>Rossi</em></h1> <!-- ✏️ Il tuo nome -->
+    <p>Fotografo — Milano, Italia</p> <!-- ✏️ La tua città / specializzazione -->
+  </div>
+  <div class="scroll-hint">Scroll<span></span></div>
+</section>
+
+<!-- ══ GALLERY ═════════════════════════════════════════════ -->
+<div id="gallery">
+  <p class="section-label" style="max-width:1300px;margin:0 auto 1rem;">Portfolio</p>
+  <h2 class="section-title" style="max-width:1300px;margin:0 auto 3rem;">Scatti selezionati</h2>
+
+  <!--
+    ✏️ COME AGGIUNGERE LE TUE FOTO:
+    1. Crea una cartella chiamata "foto" accanto a index.html
+    2. Carica le tue foto nella cartella
+    3. Sostituisci src="..." con il percorso, es: src="foto/paesaggio1.jpg"
+    4. Modifica data-caption con il titolo dello scatto
+  -->
+  <div class="gallery-grid">
+    <div class="gallery-item" data-index="0">
+      <img src="https://picsum.photos/seed/g1/800/1000" alt="Scatto 1" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+    <div class="gallery-item" data-index="1">
+      <img src="https://picsum.photos/seed/g2/800/600" alt="Scatto 2" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+    <div class="gallery-item" data-index="2">
+      <img src="https://picsum.photos/seed/g3/800/1100" alt="Scatto 3" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+    <div class="gallery-item" data-index="3">
+      <img src="https://picsum.photos/seed/g4/800/700" alt="Scatto 4" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+    <div class="gallery-item" data-index="4">
+      <img src="https://picsum.photos/seed/g5/800/900" alt="Scatto 5" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+    <div class="gallery-item" data-index="5">
+      <img src="https://picsum.photos/seed/g6/800/600" alt="Scatto 6" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+    <div class="gallery-item" data-index="6">
+      <img src="https://picsum.photos/seed/g7/800/1000" alt="Scatto 7" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+    <div class="gallery-item" data-index="7">
+      <img src="https://picsum.photos/seed/g8/800/650" alt="Scatto 8" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+    <div class="gallery-item" data-index="8">
+      <img src="https://picsum.photos/seed/g9/800/1050" alt="Scatto 9" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CATEGORIE ═══════════════════════════════════════════ -->
+<section id="categories">
+  <p class="section-label">Generi</p>
+  <h2 class="section-title">Categorie</h2>
+
+  <!-- ✏️ Cambia i titoli e le immagini delle categorie -->
+  <div class="categories-grid">
+    <div class="cat-card">
+      <img src="https://picsum.photos/seed/cat1/600/400" alt="Ritratti"/>
+      <div class="cat-label">
+        <h3>Ritratti</h3>
+        <span>12 foto</span> <!-- ✏️ aggiorna il numero -->
+      </div>
+    </div>
+    <div class="cat-card">
+      <img src="https://picsum.photos/seed/cat2/600/400" alt="Paesaggi"/>
+      <div class="cat-label">
+        <h3>Paesaggi</h3>
+        <span>18 foto</span>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img src="https://picsum.photos/seed/cat3/600/400" alt="Urbano"/>
+      <div class="cat-label">
+        <h3>Urbano</h3>
+        <span>9 foto</span>
+      </div>
+    </div>
+    <div class="cat-card">
+      <img src="https://picsum.photos/seed/cat4/600/400" alt="Still Life"/>
+      <div class="cat-label">
+        <h3>Still Life</h3>
+        <span>7 foto</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ABOUT ═══════════════════════════════════════════════ -->
+<section id="about">
+  <div class="about-img">
+    <!-- ✏️ Sostituisci con la tua foto, es: src="foto/profilo.jpg" -->
+    <img src="https://picsum.photos/seed/portrait/600/750" alt="Fotografo"/>
+  </div>
+  <div class="about-text">
+    <p class="section-label">Chi sono</p>
+    <h2 class="section-title">Un occhio, una storia.</h2>
+
+    <!-- ✏️ Scrivi la tua bio qui sotto -->
+    <p>
+      Sono Mario Rossi, fotografo milanese con una passione viscerale per la luce naturale
+      e le storie silenziose che si nascondono nei dettagli quotidiani.
+    </p>
+    <p>
+      Ho lavorato con brand internazionali, testate giornalistiche e privati, sempre con
+      un unico obiettivo: catturare il momento autentico, prima che sparisca.
+    </p>
+    <p>
+      Disponibile per commissioni, collaborazioni e progetti editoriali.
+    </p>
+
+    <div class="about-stats">
+      <div>
+        <div class="stat-num">8+</div> <!-- ✏️ Anni di esperienza -->
+        <div class="stat-label">Anni di esperienza</div>
+      </div>
+      <div>
+        <div class="stat-num">300+</div> <!-- ✏️ Progetti completati -->
+        <div class="stat-label">Progetti completati</div>
+      </div>
+      <div>
+        <div class="stat-num">40+</div> <!-- ✏️ Clienti -->
+        <div class="stat-label">Clienti soddisfatti</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTATTI ════════════════════════════════════════════ -->
+<section id="contact">
+  <p class="section-label">Lavoriamo insieme</p>
+  <h2 class="section-title">Contattami</h2>
+  <p>Hai un progetto in mente? Scrivimi, sarò felice di parlarne.</p>
+
+  <!-- ✏️ Sostituisci con la tua email -->
+  <a href="mailto:tua@email.com" class="btn">Scrivimi una mail</a>
+
+  <div class="social-links">
+    <!-- ✏️ Sostituisci i link con i tuoi profili social -->
+    <a href="https://instagram.com/" target="_blank">Instagram</a>
+    <a href="https://behance.net/" target="_blank">Behance</a>
+    <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer>
+  &copy; 2025 Mario Rossi — Tutti i diritti riservati <!-- ✏️ Il tuo nome -->
+</footer>
+
+<!-- ══ LIGHTBOX ════════════════════════════════════════════ -->
+<div id="lightbox">
+  <span id="lb-close">&times;</span>
+  <button id="lb-prev">&#8592;</button>
+  <img id="lb-img" src="" alt=""/>
+  <button id="lb-next">&#8594;</button>
+  <p id="lb-caption"></p>
+</div>
+
+<script>
+  // ── Lightbox ────────────────────────────────────────────
+  const items   = document.querySelectorAll('.gallery-item');
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lb-img');
+  const lbCap   = document.getElementById('lb-caption');
+  let current   = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    const img = items[idx].querySelector('img');
+    const cap = items[idx].querySelector('.overlay-text');
+    lbImg.src = img.src;
+    lbCap.textContent = cap ? cap.textContent : '';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function navigate(dir) {
+    current = (current + dir + items.length) % items.length;
+    openLightbox(current);
+  }
+
+  items.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-prev').addEventListener('click', () => navigate(-1));
+  document.getElementById('lb-next').addEventListener('click', () => navigate(1));
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft')   navigate(-1);
+    if (e.key === 'ArrowRight')  navigate(1);
+  });
+
+  // ── Navbar trasparente → solida allo scroll ──────────────
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 80
+      ? 'rgba(14,14,14,.97)'
+      : 'linear-gradient(to bottom, rgba(14,14,14,.95), transparent)';
+  });
+</script>
+</body>
+</html>
