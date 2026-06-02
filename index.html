@@ -25,20 +25,11 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.4rem 3rem;
       background: linear-gradient(to bottom, rgba(14,14,14,.95), transparent);
-      backdrop-filter: blur(2px);
-      transition: background .3s;
+      backdrop-filter: blur(2px); transition: background .3s;
     }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 300; letter-spacing: .15em;
-      color: var(--white); text-decoration: none;
-    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; letter-spacing: .15em; color: var(--white); text-decoration: none; }
     .nav-links { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none;
-      font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
-      transition: color .3s;
-    }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; transition: color .3s; }
     .nav-links a:hover { color: var(--accent); }
     @media(max-width:700px) { nav { padding: 1rem 1.5rem; } .nav-links { gap: 1rem; } }
 
@@ -46,87 +37,62 @@
     #hero {
       height: 100vh;
       background: url('foto/hero.jpg') center/cover no-repeat;
-      display: flex; flex-direction: column;
-      justify-content: flex-end; padding: 5rem 3rem;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 5rem 3rem;
       position: relative;
     }
-    #hero::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(14,14,14,.85) 30%, transparent 70%);
-    }
+    #hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(14,14,14,.85) 30%, transparent 70%); }
     .hero-content { position: relative; z-index: 1; }
-    .hero-content h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; line-height: 1.05; color: var(--white);
-    }
+    .hero-content h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 6rem); font-weight: 300; line-height: 1.05; color: var(--white); }
     .hero-content h1 em { font-style: italic; color: var(--accent); }
     .hero-content p { margin-top: .8rem; font-size: .9rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
-    .scroll-hint {
-      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-      z-index: 1; display: flex; flex-direction: column; align-items: center; gap: .4rem;
-      color: var(--muted); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase;
-    }
+    .scroll-hint { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); z-index: 1; display: flex; flex-direction: column; align-items: center; gap: .4rem; color: var(--muted); font-size: .7rem; letter-spacing: .15em; text-transform: uppercase; }
     .scroll-hint span { display: block; width: 1px; height: 50px; background: linear-gradient(to bottom, var(--accent), transparent); animation: drop 1.6s infinite; }
     @keyframes drop { 0%{opacity:0;transform:scaleY(0);transform-origin:top} 50%{opacity:1} 100%{opacity:0;transform:scaleY(1);transform-origin:top} }
 
-    /* ── SHARED SECTION STYLES ── */
-    .sec { padding: 6rem 3rem; max-width: 1300px; margin: 0 auto; }
+    /* ── SECTION UTILS ── */
     .section-label { font-size: .7rem; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
     .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: var(--white); margin-bottom: 3rem; }
 
     /* ── CATEGORIES NAV ── */
     #categories { padding: 6rem 3rem; max-width: 1300px; margin: 0 auto; }
-    .categories-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
-    .cat-card {
-      position: relative; overflow: hidden; cursor: pointer; height: 240px;
-      text-decoration: none; display: block;
-    }
+    #cat-nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 1rem; }
+
+    .cat-card { position: relative; overflow: hidden; cursor: pointer; height: 240px; text-decoration: none; display: block; background: var(--surface); }
     .cat-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s, filter .5s; filter: brightness(.55); }
     .cat-card:hover img { transform: scale(1.06); filter: brightness(.8); }
-    .cat-card .cat-label {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem;
-    }
-    /* Accent line on hover */
-    .cat-card::after {
-      content: ''; position: absolute; bottom: 0; left: 0;
-      height: 2px; width: 0; background: var(--accent); transition: width .4s;
-    }
+    .cat-card .cat-label { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 1.5rem; }
+    .cat-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: var(--accent); transition: width .4s; }
     .cat-card:hover::after { width: 100%; }
     .cat-label h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; color: var(--white); font-weight: 300; }
-    .cat-label span { font-size: .7rem; color: var(--accent); letter-spacing: .15em; text-transform: uppercase; margin-top: .3rem; }
-    .cat-label .arrow { font-size: .75rem; color: var(--muted); margin-top: .6rem; letter-spacing: .1em; }
+    .cat-label .count { font-size: .7rem; color: var(--accent); letter-spacing: .15em; text-transform: uppercase; margin-top: .3rem; }
+    .cat-label .arrow { font-size: .75rem; color: var(--muted); margin-top: .6rem; }
+    .cat-card-skeleton { background: var(--surface); animation: pulse 1.4s infinite; }
+    @keyframes pulse { 0%,100%{opacity:.4} 50%{opacity:.8} }
 
     /* ── CATEGORY SECTIONS ── */
     .cat-section { padding: 5rem 3rem 2rem; max-width: 1300px; margin: 0 auto; }
-    .cat-section-header {
-      display: flex; align-items: baseline; gap: 1.5rem;
-      margin-bottom: 2.5rem; padding-bottom: 1rem;
-      border-bottom: 1px solid #2a2a2a;
-    }
+    .cat-section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid #2a2a2a; }
     .cat-section-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 300; color: var(--white); }
-    .cat-section-header span { font-size: .7rem; color: var(--accent); letter-spacing: .2em; text-transform: uppercase; }
-    .back-to-top { margin-left: auto; font-size: .7rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; text-decoration: none; transition: color .3s; }
-    .back-to-top:hover { color: var(--accent); }
+    .cat-section-header .count { font-size: .7rem; color: var(--accent); letter-spacing: .2em; text-transform: uppercase; }
+    .back-top { margin-left: auto; font-size: .7rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; text-decoration: none; transition: color .3s; }
+    .back-top:hover { color: var(--accent); }
+    .cat-divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 3rem; }
 
-    /* ── GALLERY GRID (shared) ── */
+    /* ── GALLERY GRID ── */
     .gallery-grid { columns: 3; column-gap: 1rem; }
     @media(max-width:900px) { .gallery-grid { columns: 2; } }
     @media(max-width:550px) { .gallery-grid { columns: 1; } }
 
     .gallery-item { break-inside: avoid; margin-bottom: 1rem; overflow: hidden; cursor: pointer; position: relative; }
-    .gallery-item img { width: 100%; display: block; transition: transform .5s ease, filter .5s ease; filter: brightness(.9); }
+    .gallery-item img { width: 100%; display: block; transition: transform .5s, filter .5s; filter: brightness(.9); }
     .gallery-item:hover img { transform: scale(1.04); filter: brightness(1); }
-    .gallery-item .overlay {
-      position: absolute; inset: 0; background: rgba(14,14,14,.5);
-      opacity: 0; transition: opacity .4s;
-      display: flex; align-items: flex-end; padding: 1.2rem;
-    }
+    .gallery-item .overlay { position: absolute; inset: 0; background: rgba(14,14,14,.5); opacity: 0; transition: opacity .4s; display: flex; align-items: flex-end; padding: 1.2rem; }
     .gallery-item:hover .overlay { opacity: 1; }
     .overlay-text { color: var(--white); font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; }
 
-    /* Divider between category sections */
-    .cat-divider { border: none; border-top: 1px solid #1e1e1e; margin: 0 3rem; }
+    /* Loading / empty states */
+    .gallery-loading { color: var(--muted); font-size: .8rem; letter-spacing: .15em; padding: 2rem 0; }
+    .gallery-empty { color: var(--muted); font-size: .85rem; padding: 1rem 0; font-style: italic; }
 
     /* ── ABOUT ── */
     #about { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; padding: 6rem 3rem; max-width: 1300px; margin: 0 auto; }
@@ -142,7 +108,7 @@
     /* ── CONTACT ── */
     #contact { text-align: center; padding: 6rem 3rem; max-width: 1300px; margin: 0 auto; }
     #contact .section-title { margin-bottom: 1rem; }
-    #contact p { color: var(--muted); max-width: 500px; margin: 0 auto 2.5rem; }
+    #contact > p { color: var(--muted); max-width: 500px; margin: 0 auto 2.5rem; }
     .btn { display: inline-block; padding: .9rem 2.8rem; border: 1px solid var(--accent); color: var(--accent); text-decoration: none; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; transition: background .3s, color .3s; }
     .btn:hover { background: var(--accent); color: var(--bg); }
     .social-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
@@ -153,26 +119,24 @@
     footer { text-align: center; padding: 2.5rem; border-top: 1px solid #1e1e1e; color: var(--muted); font-size: .75rem; letter-spacing: .1em; }
 
     /* ── LIGHTBOX ── */
-    #lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.93); justify-content: center; align-items: center; }
+    #lightbox { display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,.93); justify-content: center; align-items: center; flex-direction: column; gap: .5rem; }
     #lightbox.open { display: flex; }
-    #lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+    #lb-img { max-width: 90vw; max-height: 85vh; object-fit: contain; }
     #lb-close { position: fixed; top: 1.5rem; right: 2rem; color: var(--white); font-size: 2.5rem; cursor: pointer; z-index: 1001; line-height: 1; }
     #lb-prev, #lb-next { position: fixed; top: 50%; transform: translateY(-50%); color: var(--white); font-size: 2rem; cursor: pointer; background: none; border: none; padding: 1rem; z-index: 1001; }
     #lb-prev { left: 1rem; } #lb-next { right: 1rem; }
-    #lb-caption { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: .8rem; letter-spacing: .15em; white-space: nowrap; }
+    #lb-caption { color: var(--muted); font-size: .8rem; letter-spacing: .15em; text-transform: uppercase; }
+    #lb-counter { color: #444; font-size: .7rem; letter-spacing: .1em; }
   </style>
 </head>
 <body>
 
-<!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+<!-- ══ NAVBAR (i link alle categorie vengono aggiunti via JS) ══ -->
 <nav>
   <a href="#hero" class="nav-logo">Vincenzo Di Capua</a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="#categories">Categories</a></li>
-    <li><a href="#cat-portraits">Portraits</a></li>      <!-- ✏️ Aggiorna con le tue categorie -->
-    <li><a href="#cat-landscapes">Landscapes</a></li>
-    <li><a href="#cat-urban">Urban</a></li>
-    <li><a href="#cat-stilllife">Still Life</a></li>
+    <!-- Le voci delle categorie vengono inserite qui da JS -->
     <li><a href="#about">About</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -187,183 +151,15 @@
   <div class="scroll-hint">Scroll<span></span></div>
 </section>
 
-<!-- ══ CATEGORIES NAV ══════════════════════════════════════ -->
-<div id="categories" class="sec">
+<!-- ══ CATEGORIES NAV (popolato da JS) ════════════════════ -->
+<div id="categories" style="padding:6rem 3rem; max-width:1300px; margin:0 auto;">
   <p class="section-label">Browse</p>
   <h2 class="section-title">Categories</h2>
-
-<<<<<<< HEAD
-  <!--
-    ✏️ COME AGGIUNGERE LE TUE FOTO:
-    1. Crea una cartella chiamata "foto" accanto a index.html
-    2. Carica le tue foto nella cartella
-    3. Sostituisci src="..." con il percorso, es: src="foto/paesaggio1.jpg"
-    4. Modifica data-caption con il titolo dello scatto
-  -->
-  <div class="gallery-grid">
-    <div class="gallery-item" data-index="0">
-      <img src="foto/DSC_0025-4 copy.jpg" alt="Scatto 1" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto2</span></div>
-    </div>
-    <div class="gallery-item" data-index="1">
-      <img src="https://picsum.photos/seed/g2/800/600" alt="Scatto 2" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
-    </div>
-    <div class="gallery-item" data-index="2">
-      <img src="https://picsum.photos/seed/g3/800/1100" alt="Scatto 3" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
-    </div>
-    <div class="gallery-item" data-index="3">
-      <img src="https://picsum.photos/seed/g4/800/700" alt="Scatto 4" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
-    </div>
-    <div class="gallery-item" data-index="4">
-      <img src="https://picsum.photos/seed/g5/800/900" alt="Scatto 5" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
-    </div>
-    <div class="gallery-item" data-index="5">
-      <img src="https://picsum.photos/seed/g6/800/600" alt="Scatto 6" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
-    </div>
-    <div class="gallery-item" data-index="6">
-      <img src="https://picsum.photos/seed/g7/800/1000" alt="Scatto 7" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
-    </div>
-    <div class="gallery-item" data-index="7">
-      <img src="https://picsum.photos/seed/g8/800/650" alt="Scatto 8" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
-    </div>
-    <div class="gallery-item" data-index="8">
-      <img src="https://picsum.photos/seed/g9/800/1050" alt="Scatto 9" loading="lazy"/>
-      <div class="overlay"><span class="overlay-text">Titolo Foto</span></div>
-    </div>
-=======
-  <div class="categories-grid">
-    <!-- ✏️ Ogni card linka alla sezione corrispondente -->
-    <a class="cat-card" href="#cat-portraits">
-      <img src="foto/cat-portraits.jpg" alt="Portraits"/>
-      <div class="cat-label">
-        <h3>Portraits</h3>
-        <span>✏️ 12 photos</span>
-        <div class="arrow">View series →</div>
-      </div>
-    </a>
-    <a class="cat-card" href="#cat-landscapes">
-      <img src="foto/cat-landscapes.jpg" alt="Landscapes"/>
-      <div class="cat-label">
-        <h3>Landscapes</h3>
-        <span>✏️ 18 photos</span>
-        <div class="arrow">View series →</div>
-      </div>
-    </a>
-    <a class="cat-card" href="#cat-urban">
-      <img src="foto/cat-urban.jpg" alt="Urban"/>
-      <div class="cat-label">
-        <h3>Urban</h3>
-        <span>✏️ 9 photos</span>
-        <div class="arrow">View series →</div>
-      </div>
-    </a>
-    <a class="cat-card" href="#cat-stilllife">
-      <img src="foto/cat-stilllife.jpg" alt="Still Life"/>
-      <div class="cat-label">
-        <h3>Still Life</h3>
-        <span>✏️ 7 photos</span>
-        <div class="arrow">View series →</div>
-      </div>
-    </a>
->>>>>>> a15455d (change)
-  </div>
+  <div id="cat-nav-grid"></div>
 </div>
 
-<!-- ══ CATEGORY: PORTRAITS ═════════════════════════════════ -->
-<!--
-  ✏️ STRUTTURA CARTELLE CONSIGLIATA:
-  foto/
-  ├── hero.jpg
-  ├── profilo.jpg
-  ├── cat-portraits.jpg      ← immagine copertina categoria
-  ├── portraits/
-  │   ├── p1.jpg
-  │   ├── p2.jpg
-  │   └── ...
-  ├── landscapes/
-  │   └── ...
-  ├── urban/
-  │   └── ...
-  └── stilllife/
-      └── ...
--->
-<div id="cat-portraits" class="cat-section">
-  <div class="cat-section-header">
-    <h2>Portraits</h2>
-    <span>✏️ 12 photos</span>
-    <a href="#categories" class="back-to-top">↑ All categories</a>
-  </div>
-  <div class="gallery-grid" data-group="portraits">
-    <div class="gallery-item"><img src="foto/portraits/p1.jpg" alt="Portrait 1" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/portraits/p2.jpg" alt="Portrait 2" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/portraits/p3.jpg" alt="Portrait 3" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/portraits/p4.jpg" alt="Portrait 4" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/portraits/p5.jpg" alt="Portrait 5" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/portraits/p6.jpg" alt="Portrait 6" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <!-- ✏️ Aggiungi o rimuovi righe a piacere -->
-  </div>
-</div>
-<hr class="cat-divider"/>
-
-<!-- ══ CATEGORY: LANDSCAPES ════════════════════════════════ -->
-<div id="cat-landscapes" class="cat-section">
-  <div class="cat-section-header">
-    <h2>Landscapes</h2>
-    <span>✏️ 18 photos</span>
-    <a href="#categories" class="back-to-top">↑ All categories</a>
-  </div>
-  <div class="gallery-grid" data-group="landscapes">
-    <div class="gallery-item"><img src="foto/landscapes/l1.jpg" alt="Landscape 1" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/landscapes/l2.jpg" alt="Landscape 2" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/landscapes/l3.jpg" alt="Landscape 3" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/landscapes/l4.jpg" alt="Landscape 4" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/landscapes/l5.jpg" alt="Landscape 5" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/landscapes/l6.jpg" alt="Landscape 6" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-  </div>
-</div>
-<hr class="cat-divider"/>
-
-<!-- ══ CATEGORY: URBAN ═════════════════════════════════════ -->
-<div id="cat-urban" class="cat-section">
-  <div class="cat-section-header">
-    <h2>Urban</h2>
-    <span>✏️ 9 photos</span>
-    <a href="#categories" class="back-to-top">↑ All categories</a>
-  </div>
-  <div class="gallery-grid" data-group="urban">
-    <div class="gallery-item"><img src="foto/urban/u1.jpg" alt="Urban 1" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/urban/u2.jpg" alt="Urban 2" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/urban/u3.jpg" alt="Urban 3" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/urban/u4.jpg" alt="Urban 4" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/urban/u5.jpg" alt="Urban 5" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/urban/u6.jpg" alt="Urban 6" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-  </div>
-</div>
-<hr class="cat-divider"/>
-
-<!-- ══ CATEGORY: STILL LIFE ════════════════════════════════ -->
-<div id="cat-stilllife" class="cat-section">
-  <div class="cat-section-header">
-    <h2>Still Life</h2>
-    <span>✏️ 7 photos</span>
-    <a href="#categories" class="back-to-top">↑ All categories</a>
-  </div>
-  <div class="gallery-grid" data-group="stilllife">
-    <div class="gallery-item"><img src="foto/stilllife/s1.jpg" alt="Still Life 1" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/stilllife/s2.jpg" alt="Still Life 2" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/stilllife/s3.jpg" alt="Still Life 3" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/stilllife/s4.jpg" alt="Still Life 4" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/stilllife/s5.jpg" alt="Still Life 5" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-    <div class="gallery-item"><img src="foto/stilllife/s6.jpg" alt="Still Life 6" loading="lazy"/><div class="overlay"><span class="overlay-text">✏️ Title</span></div></div>
-  </div>
-</div>
+<!-- ══ GALLERY SECTIONS (generate da JS) ════════════════== -->
+<div id="gallery-sections"></div>
 
 <!-- ══ ABOUT ═══════════════════════════════════════════════ -->
 <section id="about">
@@ -392,13 +188,12 @@
   <p>Have a project in mind? Feel free to reach out — I'd love to hear about it.</p>
   <a href="mailto:tua@email.com" class="btn">Send me an email</a> <!-- ✏️ La tua email -->
   <div class="social-links">
-    <a href="https://instagram.com/" target="_blank">Instagram</a>   <!-- ✏️ -->
+    <a href="https://instagram.com/" target="_blank">Instagram</a>  <!-- ✏️ -->
     <a href="https://behance.net/"   target="_blank">Behance</a>
     <a href="https://linkedin.com/"  target="_blank">LinkedIn</a>
   </div>
 </section>
 
-<!-- ══ FOOTER ══════════════════════════════════════════════ -->
 <footer>&copy; 2025 Vincenzo Di Capua — All rights reserved</footer>
 
 <!-- ══ LIGHTBOX ════════════════════════════════════════════ -->
@@ -406,48 +201,182 @@
   <span id="lb-close">&times;</span>
   <button id="lb-prev">&#8592;</button>
   <img id="lb-img" src="" alt=""/>
-  <button id="lb-next">&#8594;</button>
   <p id="lb-caption"></p>
+  <p id="lb-counter"></p>
+  <button id="lb-next">&#8594;</button>
 </div>
 
 <script>
-  // Lightbox — funziona su tutte le gallery-item della pagina
-  const items   = Array.from(document.querySelectorAll('.gallery-item'));
-  const lb      = document.getElementById('lightbox');
-  const lbImg   = document.getElementById('lb-img');
-  const lbCap   = document.getElementById('lb-caption');
-  let current   = 0;
+/* ============================================================
+   ✏️ CONFIGURAZIONE — modifica solo questa sezione
+   ============================================================ */
+const CONFIG = {
+  github: {
+    user: 'tuousername',          // ✏️ Il tuo username GitHub
+    repo: 'tuousername.github.io' // ✏️ Il nome del tuo repository
+  },
+  // ✏️ Le tue categorie: id = nome cartella in foto/, label = nome visualizzato
+  categories: [
+    { id: 'portraits',  label: 'Portraits'  },
+    { id: 'landscapes', label: 'Landscapes' },
+    { id: 'urban',      label: 'Urban'      },
+    { id: 'stilllife',  label: 'Still Life' },
+  ]
+};
+/* ============================================================ */
 
-  function openLightbox(idx) {
-    current = idx;
-    lbImg.src = items[idx].querySelector('img').src;
-    const cap = items[idx].querySelector('.overlay-text');
-    lbCap.textContent = cap ? cap.textContent.replace('✏️ ','') : '';
-    lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
+const IMG_EXT = /\.(jpe?g|png|webp|gif|avif)$/i;
+
+// Converte "naples_sunset_2023.jpg" → "Naples Sunset 2023"
+function fileToTitle(name) {
+  return name
+    .replace(IMG_EXT, '')
+    .replace(/[-_]/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+// Recupera la lista file di una cartella tramite GitHub API
+async function fetchFolder(folder) {
+  const url = `https://api.github.com/repos/${CONFIG.github.user}/${CONFIG.github.repo}/contents/${folder}`;
+  const res  = await fetch(url);
+  if (!res.ok) return [];
+  const data = await res.json();
+  return Array.isArray(data) ? data.filter(f => IMG_EXT.test(f.name)) : [];
+}
+
+/* ── LIGHTBOX ── */
+let lbImages = []; // { src, title }
+let lbIdx    = 0;
+const lb     = document.getElementById('lightbox');
+const lbImg  = document.getElementById('lb-img');
+const lbCap  = document.getElementById('lb-caption');
+const lbCnt  = document.getElementById('lb-counter');
+
+function openLb(images, idx) {
+  lbImages = images; lbIdx = idx;
+  showLb();
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function showLb() {
+  const {src, title} = lbImages[lbIdx];
+  lbImg.src = src;
+  lbCap.textContent = title;
+  lbCnt.textContent = `${lbIdx + 1} / ${lbImages.length}`;
+}
+function navLb(dir) { lbIdx = (lbIdx + dir + lbImages.length) % lbImages.length; showLb(); }
+function closeLb()  { lb.classList.remove('open'); document.body.style.overflow = ''; }
+
+document.getElementById('lb-close').addEventListener('click', closeLb);
+document.getElementById('lb-prev').addEventListener('click', () => navLb(-1));
+document.getElementById('lb-next').addEventListener('click', () => navLb(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape')     closeLb();
+  if (e.key === 'ArrowLeft')  navLb(-1);
+  if (e.key === 'ArrowRight') navLb(1);
+});
+
+/* ── BUILD GALLERY ── */
+function buildGallery(files) {
+  const images = files.map(f => ({ src: f.download_url, title: fileToTitle(f.name) }));
+  const grid = document.createElement('div');
+  grid.className = 'gallery-grid';
+
+  images.forEach((img, i) => {
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    item.innerHTML = `
+      <img src="${img.src}" alt="${img.title}" loading="lazy"/>
+      <div class="overlay"><span class="overlay-text">${img.title}</span></div>`;
+    item.addEventListener('click', () => openLb(images, i));
+    grid.appendChild(item);
+  });
+  return { grid, images };
+}
+
+/* ── INIT ── */
+async function init() {
+  const navLinks     = document.getElementById('nav-links');
+  const catNavGrid   = document.getElementById('cat-nav-grid');
+  const galSections  = document.getElementById('gallery-sections');
+  const aboutLi      = navLinks.querySelector('li:nth-last-child(2)');
+
+  for (const cat of CONFIG.categories) {
+    const folder = `foto/${cat.id}`;
+
+    // -- Nav link (inserito prima di About)
+    const li = document.createElement('li');
+    li.innerHTML = `<a href="#cat-${cat.id}">${cat.label}</a>`;
+    navLinks.insertBefore(li, aboutLi);
+
+    // -- Category card (placeholder mentre carica)
+    const card = document.createElement('a');
+    card.className = 'cat-card cat-card-skeleton';
+    card.href = `#cat-${cat.id}`;
+    card.innerHTML = `
+      <img src="" alt="${cat.label}" style="opacity:0"/>
+      <div class="cat-label">
+        <h3>${cat.label}</h3>
+        <span class="count">Loading…</span>
+        <div class="arrow">View series →</div>
+      </div>`;
+    catNavGrid.appendChild(card);
+
+    // -- Category section (placeholder)
+    const sec = document.createElement('div');
+    sec.innerHTML = `
+      <div id="cat-${cat.id}" class="cat-section">
+        <div class="cat-section-header">
+          <h2>${cat.label}</h2>
+          <span class="count">Loading…</span>
+          <a href="#categories" class="back-top">↑ All categories</a>
+        </div>
+        <p class="gallery-loading">Loading photos…</p>
+      </div>
+      <hr class="cat-divider"/>`;
+    galSections.appendChild(sec);
+
+    // -- Fetch files
+    const files = await fetchFolder(folder);
+    const countEl  = card.querySelector('.count');
+    const secCount = sec.querySelector('.count');
+    const secBody  = sec.querySelector('.cat-section');
+
+    if (files.length === 0) {
+      countEl.textContent  = 'No photos yet';
+      secCount.textContent = '0 photos';
+      sec.querySelector('.gallery-loading').outerHTML = `<p class="gallery-empty">No photos found in foto/${cat.id}/</p>`;
+      card.classList.remove('cat-card-skeleton');
+      continue;
+    }
+
+    const photoWord = files.length === 1 ? 'photo' : 'photos';
+    countEl.textContent  = `${files.length} ${photoWord}`;
+    secCount.textContent = `${files.length} ${photoWord}`;
+
+    // Cover = primo file della cartella
+    const coverImg = card.querySelector('img');
+    coverImg.src   = files[0].download_url;
+    coverImg.style.opacity = '1';
+    card.classList.remove('cat-card-skeleton');
+
+    // Build gallery
+    const {grid} = buildGallery(files);
+    sec.querySelector('.gallery-loading').replaceWith(grid);
   }
-  function closeLightbox() { lb.classList.remove('open'); document.body.style.overflow = ''; }
-  function navigate(dir) { current = (current + dir + items.length) % items.length; openLightbox(current); }
+}
 
-  items.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
-  document.getElementById('lb-close').addEventListener('click', closeLightbox);
-  document.getElementById('lb-prev').addEventListener('click', () => navigate(-1));
-  document.getElementById('lb-next').addEventListener('click', () => navigate(1));
-  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
-  document.addEventListener('keydown', e => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape')     closeLightbox();
-    if (e.key === 'ArrowLeft')  navigate(-1);
-    if (e.key === 'ArrowRight') navigate(1);
-  });
+// Navbar solid on scroll
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.style.background = window.scrollY > 80
+    ? 'rgba(14,14,14,.97)'
+    : 'linear-gradient(to bottom, rgba(14,14,14,.95), transparent)';
+});
 
-  // Navbar solid on scroll
-  const nav = document.querySelector('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.background = window.scrollY > 80
-      ? 'rgba(14,14,14,.97)'
-      : 'linear-gradient(to bottom, rgba(14,14,14,.95), transparent)';
-  });
+init();
 </script>
 </body>
 </html>
