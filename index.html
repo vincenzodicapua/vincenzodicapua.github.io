@@ -212,8 +212,8 @@
    ============================================================ */
 const CONFIG = {
   github: {
-    user: 'vincenzodicapua',          // ✏️ Il tuo username GitHub
-    repo: 'vincenzodicapua.github.io' // ✏️ Il nome del tuo repository
+    user: 'tuousername',          // ✏️ Il tuo username GitHub
+    repo: 'tuousername.github.io' // ✏️ Il nome del tuo repository
   },
   // ✏️ Le tue categorie: id = nome cartella in foto/, label = nome visualizzato
   categories: [
@@ -235,13 +235,20 @@ function fileToTitle(name) {
     .replace(/\b\w/g, c => c.toUpperCase());
 }
 
-// Recupera la lista file di una cartella tramite GitHub API
+// Legge le foto da photos.json — nessuna API, nessun limite
+let photosManifest = null;
 async function fetchFolder(folder) {
-  const url = `https://api.github.com/repos/${CONFIG.github.user}/${CONFIG.github.repo}/contents/${folder}`;
-  const res  = await fetch(url);
-  if (!res.ok) return [];
-  const data = await res.json();
-  return Array.isArray(data) ? data.filter(f => IMG_EXT.test(f.name)) : [];
+  if (!photosManifest) {
+    const res = await fetch('photos.json');
+    if (!res.ok) { console.error('photos.json non trovato'); return []; }
+    photosManifest = await res.json();
+  }
+  const catId = folder.replace('foto/', '');
+  const files  = photosManifest[catId] || [];
+  return files.map(name => ({
+    name,
+    download_url: `foto/${catId}/${name}`
+  }));
 }
 
 /* ── LIGHTBOX ── */
